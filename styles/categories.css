@@ -1,0 +1,167 @@
+/* FILE: styles/categories.css */
+        .categories {
+            padding: 2rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .categories-list {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            scrollbar-width: none;
+        }
+
+        .categories-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .category-item:hover {
+            background: #f7f7f7;
+            transform: translateY(-2px);
+        }
+
+        .category-item.active {
+            border-color: #ff385c;
+            background: #fff7f7;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .category-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+       /* FILE: styles/listings.css */
+        .listings {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .listing-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .listing-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .listing-card:hover .listing-image {
+            transform: scale(1.05);
+        }
+
+        .listing-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: white;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .listing-content {
+            padding: 1.5rem;
+        }
+
+        .listing-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .listing-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .listing-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .listing-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .listing-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #666;
+        }
+
+        .rating-star {
+            color: #ffd700;
+        }
+
+        .badge {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(228, 114, 114, 0.6);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    width: auto;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}

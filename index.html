@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VillaVibe | Holiday rentals, cabins, beach houses & more</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/search.css">
+    <link rel="stylesheet" href="styles/categories.css">
+    <link rel="stylesheet" href="styles/listings.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link rel="stylesheet" href="styles/animations.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <i class="fas fa-home"></i>
+                <span class="gradient-text">VillaVibe</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Stays</a></li>
+                <li><a href="/components/experiences.html">Experiences</a></li>
+                <li><a href="/components/onlineexperiences.html">Online Experiences</a></li>
+            </ul>
+            
+             <div class="user-menu">
+                <button class="host-btn" onclick="window.location.href='/components/becomehost.html'">Become a Host</button>
+                <div class="profile-menu" onclick="window.location.href='/components/profile.html'">
+                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-content fade-in-up">
+                <h1 class="search-title">Find your next adventure</h1>
+                <p class="search-subtitle">Discover amazing places to stay around the world</p>
+                
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Where are you going?" id="location">
+                    <div class="search-divider"></div>
+                    <input type="date" class="search-input" id="checkin">
+                    <div class="search-divider"></div>
+                    <input type="date" class="search-input" id="checkout">
+                    <div class="search-divider"></div>
+                    <input type="number" class="search-input" placeholder="Guests" min="1" id="guests">
+                    <button class="search-btn" onclick="searchProperties()">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <div class="categories-list">
+                <div class="category-item active" data-category="all">
+                    <div class="category-icon">🏠</div>
+                    <div class="category-name">All</div>
+                </div>
+                <div class="category-item" data-category="beachfront">
+                    <div class="category-icon">🏖️</div>
+                    <div class="category-name">Beachfront</div>
+                </div>
+                <div class="category-item" data-category="cabins">
+                    <div class="category-icon">🏕️</div>
+                    <div class="category-name">Cabins</div>
+                </div>
+                <div class="category-item" data-category="trending">
+                    <div class="category-icon">🔥</div>
+                    <div class="category-name">Trending</div>
+                </div>
+                <div class="category-item" data-category="luxury">
+                    <div class="category-icon">💎</div>
+                    <div class="category-name">Luxury</div>
+                </div>
+                <div class="category-item" data-category="pets">
+                    <div class="category-icon">🐕</div>
+                    <div class="category-name">Pet-friendly</div>
+                </div>
+                <div class="category-item" data-category="unique">
+                    <div class="category-icon">🎪</div>
+                    <div class="category-name">Unique stays</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Listings -->
+    <section class="listings">
+        <div class="container">
+            <h2 class="section-title">Stay anywhere</h2>
+            <div class="listings-grid" id="listings-grid">
+                <!-- Listings will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Centre</a></li>
+                        <li><a href="#">VillaCover</a></li>
+                        <li><a href="#">Safety information</a></li>
+                        <li><a href="#">Supporting people with disabilities</a></li>
+                        <li><a href="#">Cancellation options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">VillaVibe.org: disaster relief housing</a></li>
+                        <li><a href="#">Combating discrimination</a></li>
+                        <li><a href="#">Hosting responsibly</a></li>
+                        <li><a href="#">VillaVibe-friendly apartments</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Hosting</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">VillaVibe your home</a></li>
+                        <li><a href="#">VibeCover for Hosts</a></li>
+                        <li><a href="#">Hosting resources</a></li>
+                        <li><a href="#">Community forum</a></li>
+                        <li><a href="#">Hosting responsibly</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>VillaVibe</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Newsroom</a></li>
+                        <li><a href="#">New features</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Investors</a></li>
+                        <li><a href="#">VillaVibe Luxe</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>
+                    <span>&copy; 2025 VillaVibe. All rights reserved.</span>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/categories.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/init.js"></script>
+</body>
+</html>

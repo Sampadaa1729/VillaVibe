@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Experiences | Airbnb Clone</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff5a5f;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ff5a5f;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .host-btn {
+            background: none;
+            border: none;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .host-btn:hover {
+            color: #ff5a5f;
+        }
+
+        .profile-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .profile-menu:hover {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                        url('/images/onlineexp_bg.jpeg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 120px 0 80px;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            opacity: 0.8;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 60px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-bar {
+            background: #f8f9fa;
+            border-radius: 50px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            color: #333;
+            background: transparent;
+        }
+
+        .search-btn {
+            background: #ff5a5f;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #e04348;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Live Experiences */
+        .live-experiences {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .live-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .live-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .live-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff5a5f;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .live-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers the div without distortion */
+            border-radius: 10px; /* Optional for rounded corners */
+        }
+
+        .live-content {
+            padding: 1.5rem;
+        }
+
+        .live-time {
+            color: #ff5a5f;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .live-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .live-host {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .live-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .live-price {
+            font-weight: bold;
+            color: #ff5a5f;
+            font-size: 1.2rem;
+        }
+
+        .live-duration {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Upcoming Section */
+        .upcoming {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .upcoming-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .upcoming-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .upcoming-date {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .upcoming-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .upcoming-host {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .upcoming-price {
+            font-weight: bold;
+            color: #ff5a5f;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ff5a5f;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555;
+            color: #ccc;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-features {
+                grid-template-columns: 1fr;
+            }
+
+            .search-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-home"></i>
+                <span>VillaVibe</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="/index.html">Stays</a></li>
+                <li><a href="/components/experiences.html">Experiences</a></li>
+                <li><a href="/components/onlineexperiences.html" class="active">Online Experiences</a></li>
+            </ul>
+            
+            <div class="user-menu">
+                <button class="host-btn" onclick="window.location.href='becomehost.html'">Become a Host</button>
+                <div class="profile-menu" onclick="window.location.href='/components/profile.html'">
+                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Online Experiences</h1>
+            <p>Interactive activities you can do together, led by expert hosts</p>
+            
+            <div class="hero-features">
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <div class="feature-title">From Anywhere</div>
+                    <div class="feature-desc">Join from the comfort of your home</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-title">Interactive</div>
+                    <div class="feature-desc">Engage with hosts and other guests</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <div class="feature-title">Global Access</div>
+                    <div class="feature-desc">Connect with people worldwide</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="What interests you?">
+                <input type="date" class="search-input">
+                <input type="time" class="search-input">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                    Search
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Browse Categories</h2>
+            <div class="categories-grid">
+                <div class="category-item">
+                    <div class="category-icon">🎨</div>
+                    <div class="category-name">Art & Design</div>
+                    <div class="category-count">25+ experiences</div>
+                </div>
+                
+                <div class="category-item">
+                    <div class="category-icon">🍳</div>
+                    <div class="category-name">Cooking</div>
+                    <div class="category-count">30+ experiences</div>
+                </div>
+                
+                <div class="category-item">
+                    <div class="category-icon">🎵</div>
+                    <div class="category-name">Music</div>
+                    <div class="category-count">15+ experiences</div>
+                </div>
+                
+                <div class="category-item">
+                    <div class="category-icon">🧘</div>
+                    <div class="category-name">Wellness</div>
+                    <div class="category-count">20+ experiences</div>
+                </div>
+                
+                <div class="category-item">
+                    <div class="category-icon">💼</div>
+                    <div class="category-name">Business</div>
+                    <div class="category-count">10+ experiences</div>
+                </div>
+                
+                <div class="category-item">
+                    <div class="category-icon">🎭</div>
+                    <div class="category-name">Entertainment</div>
+                    <div class="category-count">18+ experiences</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Experiences -->
+    <section class="live-experiences">
+        <div class="container">
+            <h2 class="section-title">Live Now</h2>
+            <div class="live-grid">
+                <div class="live-card">
+                    <div class="live-badge">LIVE</div>
+                    <div class="live-image">
+                        <img src="/images/digi_art.jpeg">
+                    </div>
+                    <div class="live-content">
+                        <div class="live-time">Live • Started 15 min ago</div>
+                        <div class="live-title">Digital Art Workshop</div>
+                        <div class="live-host">Hosted by Emma</div>
+                        <div class="live-description">Learn digital painting techniques using Procreate. Perfect for beginners!</div>
+                        <div class="live-price">$25 per person</div>
+                        <div class="live-duration">Duration: 90 minutes</div>
+                    </div>
+                </div>
+                
+                <div class="live-card">
+                    <div class="live-badge">LIVE</div>
+                    <div class="live-image">
+                         <img src="/images/italian.jpg">
+                    </div>
+                    <div class="live-content">
+                        <div class="live-time">Live • Started 5 min ago</div>
+                        <div class="live-title">Italian Pasta Making</div>
+                        <div class="live-host">Hosted by Marco</div>
+                        <div class="live-description">Master the art of making fresh pasta from scratch with a chef from Rome.</div>
+                        <div class="live-price">$40 per person</div>
+                        <div class="live-duration">Duration: 2 hours</div>
+                    </div>
+                </div>
+                
+                <div class="live-card">
+                    <div class="live-badge">LIVE</div>
+                    <div class="live-image">
+                         <img src="/images/virtual_concert.jpeg">
+                    </div>
+                    <div class="live-content">
+                        <div class="live-time">Live • Started 25 min ago</div>
+                        <div class="live-title">Virtual Concert</div>
+                        <div class="live-host">Hosted by The Jazz Collective</div>
+                        <div class="live-description">Enjoy an intimate jazz performance from a cozy studio in New York.</div>
+                        <div class="live-price">$15 per person</div>
+                        <div class="live-duration">Duration: 60 minutes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Experiences -->
+    <section class="upcoming">
+        <div class="container">
+            <h2 class="section-title">Upcoming This Week</h2>
+            <div class="upcoming-grid">
+                <div class="upcoming-card">
+                    <div class="upcoming-date">Today 8:00 PM</div>
+                    <div class="upcoming-title">Wine Tasting from France</div>
+                    <div class="upcoming-host">Hosted by Pierre</div>
+                    <div class="upcoming-price">$45 per person</div>
+                </div>
+                
+                <div class="upcoming-card">
+                    <div class="upcoming-date">Tomorrow 3:00 PM</div>
+                    <div class="upcoming-title">Yoga & Meditation</div>
+                    <div class="upcoming-host">Hosted by Aria</div>
+                    <div class="upcoming-price">$20 per person</div>
+                </div>
+                
+                <div class="upcoming-card">
+                    <div class="upcoming-date">Wed 7:00 PM</div>
+                    <div class="upcoming-title">Magic Show</div>
+                    <div class="upcoming-host">Hosted by David</div>
+                    <div class="upcoming-price">$18 per person</div>
+                </div>
+                
+                <div class="upcoming-card">
+                    <div class="upcoming-date">Thu 6:00 PM</div>
+                    <div class="upcoming-title">Photography Tips</div>
+                    <div class="upcoming-host">Hosted by Sofia</div>
+                    <div class="upcoming-price">$35 per person</div>
+                </div>
+                
+                <div class="upcoming-card">
+                    <div class="upcoming-date">Fri 9:00 PM</div>
+                    <div class="upcoming-title">Stand-up Comedy</div>
+                    <div class="upcoming-host">Hosted by Mike</div>
+                    <div class="upcoming-price">$12 per person</div>
+                </div>
+                
+                <div class="upcoming-card">
+                    <div class="upcoming-date">Sat 4:00 PM</div>
+                    <div class="upcoming-title">Baking Masterclass</div>
+                    <div class="upcoming-host">Hosted by Julia</div>
+                    <div class="upcoming-price">$50 per person</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Centre</a></li>
+                        <li><a href="#">Safety information</a></li>
+                        <li><a href="#">Cancellation options</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">VillaVibe.org</a></li>
+                        <li><a href="#">Hosting responsibly</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Hosting</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Host an experience</a></li>
+                        <li><a href="#">Hosting resources</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 VillaVibe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>

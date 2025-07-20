@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - VillaVibe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tango, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f7f7f7;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff385c;
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #ff385c;
+        }
+
+        .profile-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .profile-menu:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        .profile-menu i {
+            color: #717171;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ff385c;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .back-btn:hover {
+            color: #e00b41;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff385c, #e00b41);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .profile-info h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .profile-info p {
+            color: #717171;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff385c;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #717171;
+        }
+
+        /* Profile Tabs */
+        .profile-tabs {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            background: white;
+            padding: 0 2rem;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .profile-tab {
+            padding: 1rem 0;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+            color: #717171;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .profile-tab.active {
+            color: #333;
+            border-bottom-color: #ff385c;
+        }
+
+        .profile-tab:hover {
+            color: #333;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Cards */
+        .booking-card, .wishlist-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .booking-card:hover, .wishlist-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #ff385c, #e00b41);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .card-details {
+            color: #717171;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .card-price {
+            color: #ff385c;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .card-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            width: fit-content;
+            margin-top: 0.5rem;
+        }
+
+        .status-confirmed {
+            background: #e8f5e8;
+            color: #2d5d2d;
+        }
+
+        .status-upcoming {
+            background: #e8f4ff;
+            color: #1e40af;
+        }
+
+        .status-completed {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .wishlist-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #ff385c;
+            color: white;
+            border-color: #ff385c;
+        }
+
+        .remove-btn {
+            color: #dc2626;
+            border-color: #dc2626;
+        }
+
+        .remove-btn:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #717171;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .profile-container {
+                padding: 1rem;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .profile-stats {
+                justify-content: center;
+            }
+
+            .profile-tabs {
+                padding: 0 1rem;
+                gap: 1rem;
+            }
+
+            .tab-content {
+                padding: 1rem;
+            }
+
+            .booking-card, .wishlist-card {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .card-image {
+                width: 100%;
+                height: 120px;
+            }
+
+            .wishlist-actions {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <i class="fas fa-home"></i>
+            airbnb
+        </a>
+        <nav class="nav-menu">
+            <a href="/index.html">Stays</a>
+            <a href="/components/experiences.html">Experiences</a>
+            <a href="/components/onlineexperiences.html">Online Experiences</a>
+            <a href="/components/becomehost.html">Become a Host</a>
+        </nav>
+        <div class="profile-menu" onclick="window.location.href='/components/profile.html'">
+                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+
+    <!-- Profile Container -->
+    <div class="profile-container">
+        <a href="/index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </a>
+        
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <h1>John Doe</h1>
+                <p><i class="fas fa-envelope"></i> john.doe@email.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> New York, United States</p>
+                <p><i class="fas fa-calendar-alt"></i> Member since January 2020</p>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <div class="stat-number" id="bookings-count">0</div>
+                        <div class="stat-label">Trips</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Reviews</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="wishlist-count">0</div>
+                        <div class="stat-label">Wishlist</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Tabs -->
+        <div class="profile-tabs">
+            <div class="profile-tab active" onclick="switchTab('bookings')">
+                <i class="fas fa-calendar-check"></i> My Bookings
+            </div>
+            <div class="profile-tab" onclick="switchTab('wishlist')">
+                <i class="fas fa-heart"></i> Wishlist
+            </div>
+        </div>
+
+        <!-- Bookings Tab -->
+        <div id="bookingsTab" class="tab-content active">
+            <div id="bookings-container">
+                 <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+            
+        <!-- Wishlist Tab -->
+        <div id="wishlistTab" class="tab-content">
+            <div id="wishlist-container">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Remove active class from all tabs and content
+            document.querySelectorAll('.profile-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Add active class to clicked tab and corresponding content
+            event.target.closest('.profile-tab').classList.add('active');
+            
+            if (tabName === 'bookings') {
+                document.getElementById('bookingsTab').classList.add('active');
+            } else if (tabName === 'wishlist') {
+                document.getElementById('wishlistTab').classList.add('active');
+            }
+        }
+
+       
+
+        // Add click handlers for view details buttons
+        document.querySelectorAll('.action-btn:not(.remove-btn)').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('This would navigate to the property details page');
+            });
+        });
+
+
+
+        // Load and display wishlist
+function loadWishlist() {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    const container = document.getElementById('wishlist-container');
+    const countElement = document.getElementById('wishlist-count');
+    
+    // Update count
+    countElement.textContent = wishlist.length;
+    
+    if (wishlist.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-heart"></i>
+                <h3>Your wishlist is empty</h3>
+                <p>Start exploring and save your favorite places</p>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = wishlist.map(item => `
+        <div class="wishlist-card">
+            <div class="card-image">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="card-content">
+                <div class="card-title">${item.title}</div>
+                <div class="card-details">
+                    <i class="fas fa-map-marker-alt"></i>
+                    ${item.location} • ${item.badge}
+                </div>
+                <div class="card-price">₹${item.price}/night</div>
+                <div class="wishlist-actions">
+                    <a href="#" class="action-btn">View Details</a>
+                    <a href="#" class="action-btn remove-btn" onclick="removeFromWishlist(${item.id})">Remove</a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function removeFromWishlist(listingId) {
+    if (confirm('Are you sure you want to remove this from your wishlist?')) {
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        wishlist = wishlist.filter(item => item.id !== listingId);
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        loadWishlist(); // Reload the display
+    }
+}
+
+
+// Load both wishlist and bookings when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadWishlist();
+    loadBookings(); // Also load bookings on page load
+});
+
+
+
+
+// Load and display bookings
+function loadBookings() {
+    const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    const container = document.getElementById('bookings-container');
+    
+    if (bookings.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-calendar-check"></i>
+                <h3>No bookings yet</h3>
+                <p>Start exploring and book your first stay</p>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = bookings.map(booking => {
+        const statusClass = getStatusClass(booking.status);
+        return `
+            <div class="booking-card">
+                <div class="card-image">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">${booking.title}</div>
+                    <div class="card-details">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ${booking.location} • ${booking.checkIn} - ${booking.checkOut}
+                    </div>
+                    <div class="card-price">₹${booking.price}/night • Total: ₹${booking.total.toLocaleString()}</div>
+                    <div class="card-status ${statusClass}">${booking.status}</div>
+                </div>
+                <div class="booking-actions" style="display: flex; flex-direction: column; gap: 0.5rem; margin-left: auto;">
+                    <small style="color: #666;">Booking ID: ${booking.id}</small>
+                    <small style="color: #666;">Guests: ${booking.guests}</small>
+                    <small style="color: #666;">${new Date(booking.bookingDate).toLocaleDateString()}</small>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+        // Update booking count in profile stats
+    const bookingCountElement = document.getElementById('bookings-count');
+    if (bookingCountElement) {
+        bookingCountElement.textContent = bookings.length;
+}
+}
+
+function getStatusClass(status) {
+    switch(status.toLowerCase()) {
+        case 'confirmed': return 'status-confirmed';
+        case 'upcoming': return 'status-upcoming';
+        case 'completed': return 'status-completed';
+        default: return 'status-confirmed';
+    }
+}
+
+// Update the switchTab function to load bookings when bookings tab is clicked
+function switchTab(tabName) {
+    // Remove active class from all tabs and content
+    document.querySelectorAll('.profile-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+
+    // Add active class to clicked tab and corresponding content
+    event.target.closest('.profile-tab').classList.add('active');
+    
+    if (tabName === 'bookings') {
+        document.getElementById('bookingsTab').classList.add('active');
+        loadBookings(); // Load bookings when tab is activated
+    } else if (tabName === 'wishlist') {
+        document.getElementById('wishlistTab').classList.add('active');
+        loadWishlist(); // Load wishlist when tab is activated
+    }
+}
+    </script>
+
+</body>
+</html>
